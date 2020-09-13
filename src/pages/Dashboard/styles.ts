@@ -79,3 +79,55 @@ export const Form = styled.form`
     }
   }
 `;
+
+export const Repositories = styled.div`
+  margin-top: 8rem;
+  max-width: 700px;
+
+  a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    border-radius: 5px;
+    background: #fff;
+    padding: 2.4rem;
+    text-decoration: none;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateX(10px);
+    }
+
+    & + a {
+      margin-top: 1rem;
+    }
+
+    img {
+      border-radius: 50%;
+      width: 64px;
+      height: 64px;
+    }
+
+    div {
+      margin-left: 1.6rem;
+
+      strong {
+        font-size: 2rem;
+        color: #3d3d4d;
+      }
+      p {
+        color: #a8a8b3;
+        font-size: 1.8rem;
+      }
+    }
+
+    svg {
+      margin-left: auto;
+      color: #c9c9d4;
+    }
+  }
+  /* a + a {
+    margin-top: 1rem;
+  } */
+`;
