@@ -14,9 +14,6 @@ interface Repository {
     login: string;
     avatar_url: string;
   };
-  stargazers_count: number;
-  forks_count: number;
-  open_issues_count: number;
 }
 
 const Dashboard: React.FC = () => {
@@ -48,7 +45,7 @@ const Dashboard: React.FC = () => {
     }
 
     try {
-      const response = await service.get<Repository>(newRepo);
+      const response = await service.get<Repository>(`/repos/${newRepo}`);
       const repository = response.data;
       setRepositories([...repositories, repository]);
       setNewRepo('');
