@@ -8,7 +8,6 @@ import api from '../../services/api';
 interface RepositoryParams {
   repoFullName: string;
 }
-
 interface Repository {
   id: number;
   full_name: string;
@@ -20,7 +19,6 @@ interface Repository {
   forks_count: number;
   open_issues_count: number;
 }
-
 interface Issue {
   id: number;
   title: string;

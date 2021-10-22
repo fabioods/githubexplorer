@@ -70,9 +70,7 @@ const Dashboard: React.FC = () => {
         />
         <button type="submit">Pesquisar</button>
       </Form>
-
       {inputError && <Error>{inputError}</Error>}
-
       <Repositories>
         {repositories.map(repo => (
           <Link key={repo.id} to={`/repository/${repo.full_name}`}>
