@@ -1,4 +1,13 @@
 describe('Contains elements', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/')
+    cy.intercept('GET', '**/repos/fabioods/githubexplorer',
+      { fixture: 'fabioods.githubexplorer.json' }).as('getGithubExplorer')
+    cy.intercept('GET', '**/repos/fabioods/Redux',
+      { fixture: 'fabioods.Redux.json' }).as('getRedux')
+    cy.intercept('GET', '**/repos/fabioods/videosPage',
+      { fixture: 'fabioods.videosPage.json' }).as('getvideosPage')
+  })
   it('should contain header of page', () => {
     //Arrange - setup initial
     //visit a page
@@ -9,26 +18,39 @@ describe('Contains elements', () => {
   });
 
   it('should add a new item to the list', () => {
-    cy.visit('http://localhost:3000/')
-    cy.get('input[type=text]').type('fabioods/githubexplorer').then(() => {
-      cy.get('button').click()
-    })
-    cy.get('input[type=text]').type('fabioods/Redux').then(() => {
-      cy.get('button').click()
-    })
-    cy.get('input[type=text]').type('fabioods/videosPage').then(() => {
-      cy.get('button').click()
-    })
+    cy.get('input[type=text]').type('fabioods/githubexplorer')
+      .should('have.value', 'fabioods/githubexplorer')
+    cy.get('button').click()
     cy.get('a').should('contain', 'fabioods/githubexplorer')
+    cy.get('input[type=text]').type('fabioods/Redux')
+      .should('have.value', 'fabioods/Redux')
+    cy.get('button').click()
     cy.get('a').should('contain', 'fabioods/Redux')
+    cy.get('input[type=text]').type('fabioods/videosPage')
+      .should('have.value', 'fabioods/videosPage')
+    cy.get('button').click()
     cy.get('a').should('contain', 'fabioods/videosPage')
   })
 
-  it('should click into an item in the list', () => {
-    cy.visit('http://localhost:3000/')
+  it('should intercept request to github', () => {
     cy.get('input[type=text]').type('fabioods/githubexplorer')
-    cy.get('button').click().then(() => {
-      cy.get('a').should('contain', 'fabioods/githubexplorer')
+      .should('have.value', 'fabioods/githubexplorer')
+    cy.get('button').click()
+    cy.get('a').should('contain', 'fabioods/githubexplorer')
+  })
+
+  it('should click into an item in the list', () => {
+    cy.get('input[type=text]').type('fabioods/githubexplorer')
+      .should('have.value', 'fabioods/githubexplorer')
+    cy.get('button').click()
+    cy.get('a').should('contain', 'fabioods/githubexplorer')
+    cy.get('input[type=text]').type('fabioods/Redux')
+      .should('have.value', 'fabioods/Redux')
+    cy.get('button').click()
+    cy.get('a').should('contain', 'fabioods/Redux')
+    cy.get('a').first().click().then(() => {
+      cy.url().should('include', 'fabioods/githubexplorer')
     })
+    cy.get('strong').should('contain', 'fabioods/githubexplorer')
   })
 });
