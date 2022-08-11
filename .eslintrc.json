@@ -46,7 +46,13 @@
     ],
     "prettier/prettier": "error",
     "no-use-before-define": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "function-declaration",
+      },
+    ],
   },
   "settings": {
     "import/resolver": {
